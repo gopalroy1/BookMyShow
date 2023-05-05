@@ -28,6 +28,7 @@ public class UserEntity {
     private String mobNo;
 
     private String address;
+    private String password;
 
     ////////////////////Mapping starts from here////////
 

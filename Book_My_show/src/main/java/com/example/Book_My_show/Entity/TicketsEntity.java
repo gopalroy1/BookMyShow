@@ -34,7 +34,7 @@ public class TicketsEntity {
 
     ///////////////////Childs
 
-    /// wrt User and ticket is child
+    /// wrt User --ticket is child
     @JoinColumn
     @ManyToOne
     private UserEntity userEntity;

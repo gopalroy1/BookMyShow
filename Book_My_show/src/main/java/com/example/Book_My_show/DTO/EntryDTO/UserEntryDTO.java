@@ -11,4 +11,5 @@ public class UserEntryDTO {
     private String email;
     private String mobNo;
     private String address;
+    private String password;
 }

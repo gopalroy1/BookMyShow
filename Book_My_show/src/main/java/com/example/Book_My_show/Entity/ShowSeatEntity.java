@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -28,6 +29,7 @@ public class ShowSeatEntity {
     @Enumerated(value = EnumType.STRING)
     private SeatType seatType;
 
+    @CreationTimestamp
     private Date bookedAt;
 
     /////////////Mapping starts here/////////

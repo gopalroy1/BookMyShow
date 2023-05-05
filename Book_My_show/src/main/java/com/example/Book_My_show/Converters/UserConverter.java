@@ -7,7 +7,9 @@ public class UserConverter {
     //// Making converters as static so that we don't have to make it's object to call it
     public static UserEntity convertToUserEntity(UserEntryDTO userEntryDTO){
         UserEntity userEntity = UserEntity.builder().age(userEntryDTO.getAge()).name(userEntryDTO.getName()).
-                email(userEntryDTO.getEmail()).mobNo(userEntryDTO.getMobNo()).address(userEntryDTO.getAddress()).build();
+                email(userEntryDTO.getEmail()).mobNo(userEntryDTO.getMobNo()).address(userEntryDTO.getAddress())
+                .password(userEntryDTO.getPassword())
+                .build();
         return userEntity;
     }
 }
