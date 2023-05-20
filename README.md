@@ -1,16 +1,9 @@
-<<<<<<< HEAD
-
-=======
->>>>>>> 732c41a3895f58fbd5662bb2ec9399d49889d50b
 # Book My Show Backend
 
 This is a Spring Boot backend Application where you can book
 tickets, find show, search movies and has 10-12 API’s.
 
 
-<<<<<<< HEAD
-
-
 ## Description
 • Framework used : Spring boot, JPA Hibernate(MYSQL DB), Maven,
 Postman.
@@ -29,12 +22,10 @@ Postman.
 
 List of API's 
 
->>>>>>> 732c41a3895f58fbd5662bb2ec9399d49889d50b
 POST API : Add User, Book Ticket, Add Theater, Add Show , Add Movies.
 
 GET API : Get User's all ticket, All ticket sold for a movie, Theater by unique location,Theater by show time, max show movies.
 
-<<<<<<< HEAD
 Delete API : Cancel ticket, Delete show, Delete movie.
 =======
 Delete API : Cancel ticket, Delete show, Delete movie.
@@ -56,4 +47,4 @@ Delete API : Cancel ticket, Delete show, Delete movie.
 
 ### Layers
 ![Intelije](https://github.com/gopalroy1/BookMyShow/assets/105766337/0a02d96d-b634-4c0e-a283-9b684217d5de)
->>>>>>> 732c41a3895f58fbd5662bb2ec9399d49889d50b
+
