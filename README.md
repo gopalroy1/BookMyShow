@@ -25,8 +25,9 @@ Delete API : Cancel ticket, Delete show, Delete movie.
 
 ## ScreenShots
 
+
 ### ER Diagram
-![ER Dia](https://github.com/gopalroy1/BookMyShow/assets/105766337/46d515a8-1758-4dfb-a058-de612d5a0dab)
+![ER Dia1](https://github.com/gopalroy1/BookMyShow/assets/105766337/ed73093c-f8dc-437e-a9ec-764b375b46a4)
 
 ### UI
 
