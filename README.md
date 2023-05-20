@@ -1,7 +1,7 @@
 # Book My Show Backend
 
 This is a Spring Boot backend Application where you can book
-tickets, find show, search movies and has 10-12 API’s.
+tickets, find show, search movies, cancel ticket and get email for the cancellation with refund and has 10-12 API’s.
 
 
 ## Description
