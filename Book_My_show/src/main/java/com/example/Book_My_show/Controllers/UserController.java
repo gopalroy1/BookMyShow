@@ -8,10 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/user")
@@ -25,6 +22,17 @@ public class UserController {
         try {
             userService.addUserService(userEntryDTO);
             return new ResponseEntity<>("user added sucessfully", HttpStatus.CREATED);
+        }
+        catch (Exception e){
+            return new ResponseEntity<>(e.toString(),HttpStatus.BAD_REQUEST);
+        }
+
+    }
+    @GetMapping("/alltickets")
+    public ResponseEntity<String> userTicketsController(@RequestParam int id){
+        try {
+            String result =userService.allTickets(id);
+            return new ResponseEntity<>(result, HttpStatus.CREATED);
         }
         catch (Exception e){
             return new ResponseEntity<>(e.toString(),HttpStatus.BAD_REQUEST);

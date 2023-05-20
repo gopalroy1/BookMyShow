@@ -30,7 +30,17 @@ public class MovieController {
     @DeleteMapping("/delete")
     public ResponseEntity<String> deleteByIdController(@RequestParam int id){
         try {
-            String result = movieService.deleteMovieServiceSS(id);
+            String result = movieService.deleteMovieService(id);
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        }
+        catch (Exception e){
+            return new ResponseEntity<>(e.toString(), HttpStatus.BAD_REQUEST);
+        }
+    }
+    @GetMapping("/maxshowmovie")
+    public ResponseEntity<String> maxMovieShowController(){
+        try {
+            String result = movieService.movieWithMaxShowService();
             return new ResponseEntity<>(result, HttpStatus.OK);
         }
         catch (Exception e){

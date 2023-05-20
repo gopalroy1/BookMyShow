@@ -2,11 +2,13 @@ package com.example.Book_My_show.DTO.EntryDTO;
 
 import com.example.Book_My_show.Enums.ShowType;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Date;
 
 @Data
 public class ShowEntryDTO {
@@ -17,6 +19,8 @@ public class ShowEntryDTO {
     private int premiumPrice;
     private  int theaterId;
     private int movieId;
+
+
 
 //    {
 //        "showType":"_3D",

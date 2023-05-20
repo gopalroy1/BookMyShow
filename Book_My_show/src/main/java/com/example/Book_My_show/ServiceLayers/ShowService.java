@@ -32,7 +32,7 @@ public class ShowService {
         int theaterId = showEntryDTO.getTheaterId();
 
         //Setting its name
-        showEntity.setShowName(movieRepositary.findById(movieId).get().getMovieName()+"Show");
+        showEntity.setShowName(movieRepositary.findById(movieId).get().getMovieName()+" Show");
 
 
 
@@ -46,7 +46,7 @@ public class ShowService {
         //Setting show seats
         showEntity.setShowSeatEntities(showSeatEntityList);
         showRepositary.save(showEntity);
-        return ""+showEntity.getShowName()+" have been added in "+ showEntity.getTheaterEntity().getName()+ " at "+
+        return ""+showEntity.getShowName()+"  have been added in "+ showEntity.getTheaterEntity().getName()+ " at "+
                 showEntity.getTheaterEntity().getLocation() + " sucessfully";
 
     }
@@ -79,6 +79,13 @@ public class ShowService {
 
         }
         return showSeatEntityList;
+
+    }
+    public String deleteShow(int id){
+        ShowEntity showEntity = showRepositary.findById(id).get();
+        String ans  = " Show "+showEntity.getShowName()+" deleted sucessfully";
+        showRepositary.delete(showEntity);
+        return ans;
 
     }
 }

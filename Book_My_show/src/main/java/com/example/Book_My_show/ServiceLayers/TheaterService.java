@@ -3,16 +3,22 @@ package com.example.Book_My_show.ServiceLayers;
 import com.example.Book_My_show.Converters.TheaterConverter;
 import com.example.Book_My_show.DTO.DeleteDTO.TheaterDeleteByNameAndLocationDTO;
 import com.example.Book_My_show.DTO.EntryDTO.TheaterEntryDTO;
+import com.example.Book_My_show.Entity.MovieEntity;
+import com.example.Book_My_show.Entity.ShowEntity;
 import com.example.Book_My_show.Entity.TheaterEntity;
 import com.example.Book_My_show.Entity.TheaterSeatEntity;
 import com.example.Book_My_show.Enums.SeatType;
+import com.example.Book_My_show.RepositaryLayers.MovieRepositary;
+import com.example.Book_My_show.RepositaryLayers.ShowRepositary;
 import com.example.Book_My_show.RepositaryLayers.TheaterRepositary;
 import com.example.Book_My_show.RepositaryLayers.TheaterSeatRepositary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.Time;
+import java.util.*;
+
+import static net.bytebuddy.matcher.ElementMatchers.is;
 
 @Service
 public class TheaterService {
@@ -21,7 +27,10 @@ public class TheaterService {
     TheaterRepositary theaterRepositary;
     @Autowired
     TheaterSeatRepositary theaterSeatRepositary;
-
+    @Autowired
+    MovieRepositary movieRepositary;
+    @Autowired
+    ShowRepositary showRepositary;
     //     Theater already exists or not checking
     public  boolean theaterAlreadyExists(TheaterEntryDTO theaterEntryDTO){
         List<TheaterEntity> theaterEntityList = theaterRepositary.findAll();
@@ -137,6 +146,78 @@ public class TheaterService {
         }
         return "All Theaters are deleted sucessfully";
 
+    }
+
+    public String getShowsByTheaterAndMovie  (int movieId, int theaterId) throws Exception{
+        MovieEntity movieEntity = movieRepositary.findById(movieId).get();
+        List<ShowEntity> showEntityList= movieEntity.getShowEntityList();
+        List<ShowEntity> ansList = new ArrayList<>();
+        String ans = "";
+        for (ShowEntity showEntity: showEntityList
+             ) {
+            if (showEntity.getTheaterEntity().getId()==theaterId){
+                ansList.add(showEntity);
+                ans+= showEntity.getShowName()+" "+showEntity.getShowDate()+" \n";
+            }
+        }
+        if (ansList.size()<=0){
+            throw  new Exception("No show Availble");
+        }
+        return ans;
+
+    }
+    public String uniquelocationOfATheaterService(String name) throws Exception{
+        //Getting all theater by a particular name
+        List<TheaterEntity> theaterEntityList = theaterRepositary.findByName(name);
+
+        //finding uniqur location in the list
+        //List to check if a name has came or not
+        int count=0;
+        String ans = "";
+        List<String> uniqueName = new ArrayList<>();
+        for (TheaterEntity theaterEntity:theaterEntityList
+             ) {
+            //checking and then simply ading in the count and ans
+            if (uniqueLocationfun(uniqueName,theaterEntity.getLocation())){
+                uniqueName.add(theaterEntity.getLocation());
+                count++;
+                ans+=theaterEntity.getLocation()+" ";
+            }
+        }
+        if (uniqueName.size()<=0){
+            throw new Exception("Theater doesn't exists");
+        }
+        return count+" :"+ans;
+    }
+    //To check unique location or not
+    public Boolean uniqueLocationfun(List<String> uniqueName,String theaterName){
+        for (String s:uniqueName
+             ) {
+            if (s.equals(theaterName)){
+                return  false;
+            }
+        }
+        return true;
+    }
+    public String theaterListByTime(String time) throws Exception{
+        List<ShowEntity> showEntityList= showRepositary.showByTime(time);
+        if(showEntityList.size()==0){
+            throw new Exception("No show exists");
+        }
+        //Iterating and ssaving the answer
+        // Using hashmap to check if it has a unique theater or not
+        int showCount = showEntityList.size();
+        HashMap<Integer,Boolean> map = new HashMap<>();
+        String ans = "";
+        for (ShowEntity showEntity:showEntityList
+             ) {
+            int theaterId = showEntity.getTheaterEntity().getId();
+            if (!map.containsKey(theaterId)){
+                map.put(theaterId,true);
+                ans+= showEntity.getTheaterEntity().getName()+" ";
+            }
+        }
+        return  "Total "+showCount+" show exists in "+map.size()+" unique theater which are "+ans;
     }
 
 
